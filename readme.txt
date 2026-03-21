@@ -8,5 +8,5 @@
             4.重新計算ackyle func.，與原結果比較，較佳就替換
     4.從NP個向量中找出最小(也指最佳近似解)
 5.找出所有run的最佳近似解中的最佳&計算其平均
-
+![image](https://github.com/xuanlai710/DE_Ackyle/blob/main/TEST3.png)
 
