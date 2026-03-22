@@ -95,7 +95,7 @@ int main(){
     if(!(cin >> Runs >> D >> NP >> F >> CR))  return 0;
     bool input=true;
     if(NP<4){
-        cout <<"NP須至少為4" <<endl;
+        cout <<"Population Size須至少為4" <<endl;
         input = 0;}
     if(F >2||F <0){
         cout <<"F數值錯誤，請介於[0,2]間" <<endl;
