@@ -31,7 +31,7 @@ double DE(int D,int NP,double F ,double CR){
     //uniform probability distribution
     random_device rd;//接近隨機的亂數
     mt19937 gen(rd());
-    uniform_real_distribution<float> unif(L, R);
+    uniform_real_distribution<double> unif(L, R);
     //NP個random vector
     vector<vector<double>> vector_populationis(NP, vector<double>(D));
     //放NP個向量進ack後的計算結果
@@ -48,6 +48,7 @@ double DE(int D,int NP,double F ,double CR){
     //2.DE
     uniform_int_distribution<int> dist_rx(0, NP-1 );//0~ NP-1
     uniform_int_distribution<int> dist_j(0, D-1);
+    uniform_real_distribution<double> dis(0.0, 1.0);
     while (evals < D*10000)//不可超過Evaluation times
     {
         for(int i=0;i<NP;++i){
@@ -60,7 +61,6 @@ double DE(int D,int NP,double F ,double CR){
 
             //2.Crossover
             vector<double> trial(D);//紀錄Crossover後的新變化向量，D維度
-            uniform_real_distribution<double> dis(0.0, 1.0);
 
             int rnbr = dist_j(gen);//每向量有一rnbr(i)，確保至少有一個會是vi(突變)
             for(int j=0;j<D;++j){
@@ -68,12 +68,10 @@ double DE(int D,int NP,double F ,double CR){
                 if(dis(gen)<=CR ||j == rnbr)
                     trial[j] = vector_populationis[r1][j]+F*(vector_populationis[r2][j]-vector_populationis[r3][j]);
                 //仍是原向量不變化
-                else 
-                    trial[j] = vector_populationis[i][j];
+                else    trial[j] = vector_populationis[i][j];
             }
             //3.Selection(選新舊誰好)
             double score = ackyle_fun(trial,D);
-            // evals++;
             if(score <= cost[i]){
                 vector_populationis[i] = trial;
                 cost[i] = score;
@@ -92,10 +90,18 @@ double DE(int D,int NP,double F ,double CR){
 int main(){
     int Runs,D,NP;
     double F ,CR;
-    cout <<"input：";
-    if(!(cin >> Runs >> D >> NP >> F >> CR)) 
-        return 0;
-
+    cout <<"input(Run, Dimension, Population Size, F[0,2], CR[0,1])：\n";
+    //防呆
+    if(!(cin >> Runs >> D >> NP >> F >> CR))  return 0;
+    bool input=true;
+    if(F >2||F <0)  
+    {    cout <<"F數值錯誤，請介於[0,2]間" <<endl;
+         input=0;}
+    if(CR <0||CR>1)
+     {    cout <<"CR數值錯誤，請介於[0,1]間" <<endl;
+         input=0;}
+    if(!input)  return 0;
+    
     double Best_fitness , Average_run = 0;
     for(int i =0;i<Runs;++i){
         double now_fitness = DE(D,NP,F ,CR);
