@@ -13,8 +13,6 @@ using namespace std;
 // F (Scaling Factor): 自行設定或參考論文 0.5
 // CR (Crossover Rate): 自行設定或參考論文 0.1||0.9
 
-
-
 double ackyle_fun(const vector<double>& x, int D){
     double a=20, b=0.2, c=2 * M_PI ; //d維度
     double sum1 = 0.0, sum2 = 0.0;
@@ -22,9 +20,7 @@ double ackyle_fun(const vector<double>& x, int D){
         sum1 += x[i] * x[i];
         sum2 += cos(c * x[i]);
     }
-    //  [-32.768, 32.768]
     return -a*exp(-b*sqrt(sum1/D)) - exp(sum2/D) + a +exp(1);
-    // f(0) = 0;
 }
 
 //單一run求最佳解 
@@ -45,9 +41,9 @@ double DE(int D,int NP,double F ,double CR){
             vector_populationis[i][j] = unif(gen);
         }
         cost[i] = ackyle_fun(vector_populationis[i], D);//將最初向量接用ackyle_fun計算後，記錄初始值
-        // evals++;//算一次ackyle_fun
+        
     }
-    evals = NP;
+    evals = NP;//算ackyle_fun數量
     
     //2.DE
     uniform_int_distribution<int> dist_rx(0, NP-1 );//0~ NP-1
@@ -109,7 +105,6 @@ int main(){
             Best_fitness = now_fitness;
     }
     Average_run = Average_run / Runs;
-
     cout << "Best fitness of "<<Runs<<" runs:"<< Best_fitness <<endl;
     cout << "Average of " <<Runs<<" Runs’ best fitness:"<< Average_run <<endl;
 }
