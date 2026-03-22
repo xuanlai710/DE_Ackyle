@@ -94,12 +94,15 @@ int main(){
     //防呆
     if(!(cin >> Runs >> D >> NP >> F >> CR))  return 0;
     bool input=true;
-    if(F >2||F <0)  
-    {    cout <<"F數值錯誤，請介於[0,2]間" <<endl;
-         input=0;}
+    if(NP<4){
+        cout <<"NP須至少為4" <<endl;
+        input = 0;}
+    if(F >2||F <0){
+        cout <<"F數值錯誤，請介於[0,2]間" <<endl;
+        input=0;}
     if(CR <0||CR>1)
-     {    cout <<"CR數值錯誤，請介於[0,1]間" <<endl;
-         input=0;}
+    {   cout <<"CR數值錯誤，請介於[0,1]間" <<endl;
+        input=0;}
     if(!input)  return 0;
     
     double Best_fitness , Average_run = 0;
