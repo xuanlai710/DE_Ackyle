@@ -12,7 +12,7 @@
     c.從NP個向量中找出最小(也指最佳近似解)    
 6.找出所有run最佳近似解中的 最佳 & 計算平均    
 ```
-
+   
 使用者須入Run, Dimension, Population Size, F, CR，若有數值錯誤會未輸入是無法使用的
 ![image](https://github.com/xuanlai710/DE_Ackyle/blob/main/img/warning.png)
 
