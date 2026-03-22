@@ -1,8 +1,9 @@
 虛擬碼：    
 ```
-1.run數：   
-    2.初始化出NP個D維度向量，並將他們用ackyle func.計算   
-    3.當(目前次數<Evaluation times)：   
+1.run數：
+    2.輸入Run, Dimension, Population Size, F, CR數值
+    3.初始化出NP個D維度向量，並將他們用ackyle func.計算   
+    4.當(目前次數<Evaluation times)：   
         a.對每個向量(NP個)做DE步驟:         
             - Mutation   
             - Crossover   
